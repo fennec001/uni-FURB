@@ -1,0 +1,85 @@
+indireto
+var1:
+    DB 0x77
+var2:
+    DW 0x2244
+var3:
+    DB 0x99
+
+start:
+    MOV byte var1, 0x88  
+    ; mov [0000],0x88
+    MOV word var2, 0x8432
+    ; mov [0001],0x8432
+    MOV byte var3, 0x11
+    ; mov [0002],  0x11
+    hlt
+    
+
+em string
+  db 0x88
+  db 0x99
+  db 0xAA
+start:
+  ;MODO ENDERECAMENTO INDEXADO (SI,DI) (INDICES)
+  MOV SI,0000
+  MOV AL,byte [SI,2] ; [SI+2]
+  HLT
+
+  db 0x88
+  db 0x99
+  db 0xAA
+start:
+  ;MODO ENDERECAMENTO INDEXADO (SI,DI) (INDICES)
+  MOV SI,0000
+  MOV AL,byte [SI,2] ; [SI+2]
+  HLT
+
+
+
+macros:
+
+tabela:  ; imagine ser uma tabela
+  dw 0x7788
+  dw 0x6699
+  dw 0x3344
+start:
+  MOV CX, 3
+  MOV SI, OFFSET tabela
+  REP LODS WORD   ; MOV AX<----[SI], SI=SI+1 SI=SI+1
+  HLT
+
+copiar 
+tabela1:  
+  dw 0x7788
+tabela2:
+  dw 0x6699
+start:
+  MOV SI, offset tabela1
+  MOV DI, offset tabela2
+  ; MOVS BYTE   [DI]<===[SI], SI=SI+1 DI=DI+1
+  MOVS BYTE
+  MOVS BYTE
+  HLT
+  
+  comparador boolean para negar ou aceitar
+
+
+tabela1:  
+  dw 0x7788
+  dw 0x6611
+tabela2:
+  dw 0x7688
+  dw 0x6611
+start:
+  ;CMPS BYTE   SE byte [SI]==byte [DI] ===> FLAG Z=1, CASO CONTRARIO 
+  ;FLAG Z=0 E SI=SI+1 E DI=DI+1
+  ;CMPS WORD   SE WORD [SI]==WORD [DI] ===> FLAG Z=1, CASO CONTRARIO 
+  ;FLAG Z=0 E SI=SI+2 E DI=DI+2
+  MOV CX, 4
+  MOV SI, offset tabela1
+  MOV DI, offset tabela2
+  REPZ CMPS BYTE
+  HLT
+  
+  
