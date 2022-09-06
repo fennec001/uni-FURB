@@ -82,4 +82,122 @@ start:
   REPZ CMPS BYTE
   HLT
   
-  
+
+start:
+    MOV AX,1234  ;16 bits  modo de endereçamento imediato
+        MOV BX,0x1234 ;16 bits modo de endereçamento imediato
+	    MOV CX,0b1111111111111111 ;16 bits modo de endereçamento imediato
+	        MOV DX,0x4444 ;16 bits modo de endereçamento imediato
+		    MOV AH,0x22 ; 8 bits modo de endereçamento imediato
+		        MOV AL,0x22 ; 8 bits modo de endereçamento imediato
+			    MOV BH,0x33 ; 8 bits modo de endereçamento imediato
+			        MOV BL,0x44 ; 8 bits modo de endereçamento imediato
+				    MOV CH,0x55 ; 8 bits modo de endereçamento imediato
+				        MOV CL,0x66 ; 8 bits modo de endereçamento imediato
+					    MOV DH,0x77 ; 8 bits modo de endereçamento imediato
+					        MOV DL,0x88 ; 8 bits modo de endereçamento imediato]
+						    ; imediato = faz parte da instrução
+						        MOV SI,0x4888 ; somente sao de 16 bits
+							    MOV DI,0x0388 ; somente sao de 16 bits
+							        hlt
+								 
+
+								    
+								    DB 0x12
+								    DB 0x33
+								    start:
+								     ;modo de enderecamento por regitsrador
+								      MOV AL, byte [0000] 
+								       MOV AX, word [0000]
+								       hlt
+
+
+
+
+start:
+
+    MOV BX,0b1010101010101010
+        ; 1 vira 0 e o 0 vira 1, ou seja, inverte 
+	    NOT BX
+	          NOT BX
+		          NOT BX
+			            NOT BX
+				                NOT BX
+						              NOT BX
+
+							      mesma operação com valor menor
+
+							      var1: db 0xAA
+							      start:
+
+							          MOV BL,0b10101010
+								      
+								          ; 1 vira 0 e o 0 vira 1, ou seja, inverte 
+									      NOT BL
+									            NOT BL
+										            NOT BL
+											              NOT BL
+												                  NOT BL
+														                NOT BL
+
+
+
+																trocar apenas uma posição de bit 
+
+																start:
+																    MOV CH,0b10001101;8D
+																        AND CH,0B11111011; para zerar apenas um bit em específico
+																	    
+
+
+
+
+																	    utilização do XOR para zerar um numero
+																	        start:
+																		    
+																		        MOV CL, 0b10101111
+																			    MOV DH, 0b11000111
+																			        
+																				    ;XOR
+																				        XOR CL,CL ; forma rapiad de zerar o CL, igualando-o a sí mesmo
+																					    ; numeros iguais no xor = 0 diferentes  = 1
+
+
+
+																					    esse aqui é pog 
+
+
+
+																					    start:
+																					      MOV CX,0
+																					        MOV BX,46688
+																						ROTACIONAR:  
+																						  SHL BX,1
+																						    JC  ACESO
+																						      JMP APAGADO  
+																						      ACESO:
+																						        ; AQUI VOU IMPRIMIR O NUMERO 1
+																							  ; VOU CHAMAR O S.O PARA IMPRIMIR O CARACTER "1"
+																							    MOV AH,2 ; SERVICO IMPRIMIR CARACTER 
+																							      MOV DL, 49
+																							        INT 0x21
+																								  JMP VERIFICAR
+																								  APAGADO:
+																								    ; AQUI VOU IMPRIMIR O NUMERO 0
+																								      ; VOU CHAMAR O S.O PARA IMPRIMIR O CARACTER "0"
+																								        MOV AH, 2 ; SERVICO IMPRIMIR CARACTER
+																									  MOV DL, 48
+																									    INT 0x21
+																									      JMP VERIFICAR
+																									        
+																										VERIFICAR:
+																										  INC CX
+																										    CMP CX, 16
+																										      JE FIM
+																										        JMP ROTACIONAR
+																											  
+																											  FIM:
+
+																											    
+
+
