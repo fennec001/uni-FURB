@@ -1,0 +1,114 @@
+ax (de 16 bits) pode ser dividido em 2 registradores de 8 bits
+
+
+
+em AH 					 AL
+   ^   					 ^		
+
+  BITS DE MAIOR ORDEM			BITS DE MENOR ORDEM 
+  
+
+instruções para mandar e para ler: out \ in
+
+SI = source index  
+DI = destination index  
+
+MOVSB = copia string em nivel de byte
+
+
+função da pilha = 
+salvar endereço de retorno(call/ret)
+salvar registradores (push|pop)
+passagem de parâmetros  
+
+Segmentação de memória: 
+
+software a partir da aula que vem:
+pesquisar google: 8086 emulator online
+
+hello: db miguelito
+start:
+   MOV AX,0x1234
+	hlt
+
+[ultimo conteudo que estava perdido no compilador]
+var1:
+    DB 0x77
+    var2:
+        DW 0x2244
+sta
+	    MOV AX, OFFSET var1
+	        MOV BX, OFFSET var2
+		    ; para apontar para a memoria e consequentemente acessar, utilizimaos BX,SI,DI
+		     MOV BX,OFFSET var1 ; poderia ter utilizado no lugar de bx si ou di
+		      MOV byte[BX],0x88 ; escreve 88 na posição de memória indicada por BX
+		          
+			      MOV SI, OFFSET var2
+			          
+				      
+				          hlt
+					      
+
+Aula 29/8
+	          
+em questão de registradores: AX = AH + AL 		          
+				      	
+Conta para adicionar: 
+start:
+	mov AL,1
+	MOV SI, 0x1000 (funciona pois AX = AL + AH e AH vale 0)
+	ADD SI,AX
+	hlt
+
+Soma em 8 bits:
+
+start:
+	MOV CH,0X11
+	MOV BL,0X11
+	ADD CH,BL
+	HLT
+
+
+
+soma básica:
+
+db(define byte) 0x33
+start:
+	MOV CH,0X33
+	ADD byte[0000], CH
+	hlt
+
+
+
+somamos os 2 numeros no SI: 
+start:
+
+    MOV SI,0X1000
+        MOV DI,0X1000
+	    ADC SI, DI
+	        HLT
+
+		
+para acender o carry: start:
+ STC ; esta instrução acende o carry
+para apagar o carry:   
+CLC ; esta instrução apaga o carry  
+
+fazemos ADC para adicionar o CARRY (valor estourado)
+
+soma de 2 numeros / variaveis
+db 0x44
+start:
+    STC
+        MOV CL,0X22
+	    MOV BX,0
+	        ADC BYTE [BX],CL
+		    hlt
+
+
+start:
+    STC
+        MOV CL,0X22
+	    MOV BX,0
+	        ADC BYTE [BX],CL
+		    INC FOR INCREMETING LIKE COUNTER, DEC FOR G
